@@ -6,7 +6,6 @@ class Controller extends Component {
 
     constructor(){
         super();
-        //will have to be replaced with the provided url
         this.baseUrl= "http://localhost:8080/api";
     }
 
