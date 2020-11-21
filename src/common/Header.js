@@ -32,8 +32,7 @@ class Header extends Component {
                             <SearchIcon style={{ color: "#FFFFFF" }} />
                         </div>
                         <Input
-                            //onChange={this.props.searchRestaurantsByName.bind(this)}
-                            //onChange={this.props.searchRestaurantsByName.bind(this)}
+                            onChange={this.props.searchingRestaurantsApiHandler.bind(this)}
                             className={classes.searchInput}
                             placeholder="Search by Restaurant Name"
                         />

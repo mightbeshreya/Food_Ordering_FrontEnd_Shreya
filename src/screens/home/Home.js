@@ -43,12 +43,45 @@ class Home extends Component {
         });
     };
 
+    searchingRestaurantsApiHandler = event => {
+        const restoSearchString = event.target.value;
+        console.log("RestoSearchString::"+restoSearchString )
+        const apiUrl = this.props.baseUrl + "/restaurant/name/" + restoSearchString;
+        const that = this;
+        if (restoSearchString!==null &&restoSearchString!=="" &&restoSearchString!==undefined) {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET',apiUrl);
+            xhr.send();
+            xhr.addEventListener("readystatechange", function() {
+                if (this.readyState === 4) {
+                    if (xhr.status === 200) {
+                        console.log("Get All Restaurants DONE");
+                        console.log(this.responseText);
+                        that.setState(
+                            {
+                                allRestaurantsDetails: JSON.parse(this.responseText).restaurants
+                            }
+                        );
+                    }
+                    if(JSON.parse(this.responseText).restaurants.length === 0) {
+                        console.log("No Restaurant");
+                    }
+                }
+            });
+        } else {
+            this.getAllRestaurantsApiHandler();
+        }
+    };
+
     render() {
         return(
             <div>
-                <Header baseUrl={this.props.baseUrl} />
+                <Header baseUrl={this.props.baseUrl} searchingRestaurantsApiHandler={this.searchingRestaurantsApiHandler} />
                 <div className="all-restaurants">
+
                     {
+                        this.state.allRestaurantsDetails.length === 0  ? <div> <span>No restaurant with the given name</span></div>
+                            :(
                         (this.state.allRestaurantsDetails).map((restaurantDetails, index) =>
                             <div key={"div" + index} className="restaurantCard">
                                 <Grid key={index}>
@@ -83,6 +116,7 @@ class Home extends Component {
                                 </Grid>
                             </div>
                         )
+                            )
                     }
                 </div>
             </div>
