@@ -12,6 +12,10 @@ const styles = {
         color: '#FFFFFF',
         fontSize: 32,
     },
+    searchInput: {
+        width: "100%",
+        color: "white"
+    },
 }
 
 class Header extends Component {
@@ -30,7 +34,7 @@ class Header extends Component {
                         <Input
                             //onChange={this.props.searchRestaurantsByName.bind(this)}
                             //onChange={this.props.searchRestaurantsByName.bind(this)}
-                            //className={classes.searchInput}
+                            className={classes.searchInput}
                             placeholder="Search by Restaurant Name"
                         />
                     </div>
